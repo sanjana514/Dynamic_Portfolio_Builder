@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
+    <!-- Swiper.js CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 </head>
 <body>
     <header class="bg-white shadow-md sticky top-0 z-50">
@@ -58,9 +59,21 @@
             </div>
         </div>
         <!-- Right Side: Image -->
-        <div class="mt-10 md:mt-0">
-            <img src="your-image.png" alt="Resume Preview" class="w-full md:w-[500px]">
-        </div>
+        <div class="w-full max-w-lg mx-auto">
+            <div class="swiper mySwiper rounded-lg shadow-lg">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="image/ima1.jpg" alt="Slide 1" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="swiper-slide">
+                  <img src="image/ima3.webp" alt="Slide 3" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="swiper-slide">
+                  <img src="image/portfolio.jpg" alt="Slide 4" class="w-full h-auto rounded-lg">
+                </div>
+              </div>
+            </div>
+          </div>
     </section>
     <section class="bg-gradient-to-r from-white to-teal-50 py-16">
         <div class="container mx-auto px-6 text-center">
@@ -173,7 +186,21 @@
             </div>
         </div>
     </footer>
-    
+    <!-- Swiper.js JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 20,
+        slidesPerView: 1,
+        loop: true,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+      });
+    });
+  </script>
 </body>
 </html>
 
