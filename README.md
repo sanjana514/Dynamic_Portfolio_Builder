@@ -4,13 +4,13 @@ This is a dynamic portfolio generator where users can create and download their 
 
 ## 🔹 Features
 
- 1 User Authentication (Login required to access the portfolio generation feature)
+ 1.  User Authentication (Login required to access the portfolio generation feature)
 
- 2 Portfolio Sections
+ 2.  Portfolio Sections
 
- 3 PDF Generation & Database Storage (Stores portfolio data in MongoDB and generates a downloadable PDF)
+ 3.  PDF Generation & Database Storage (Stores portfolio data in MongoDB and generates a downloadable PDF)
 
-# 🔹 Tech Stack
+## 🔹 Tech Stack
 ✅ Frontend: HTML, Tailwind CSS
 
 ✅ Backend: Node.js, Express.js
@@ -21,10 +21,16 @@ This is a dynamic portfolio generator where users can create and download their 
 
 ✅ PDF Generation: jsPDF / Puppeteer
 
-# 🔹 How to Run Locally
-1️⃣ Clone the repository
-2️⃣ Navigate to the project folder
-3️⃣ Install dependencies
-4️⃣ Start the server
+## 🔹 How to Run Locally
+1️⃣ Clone the repository (git clone https://github.com/yourusername/dynamic-portfolio-generator.git)
+
+
+2️⃣ Navigate to the project folder (cd dynamic-portfolio-generator)
+
+3️⃣ Install dependencies (npm install)
+
+
+4️⃣ Start the server (npm start)
+
 5️⃣ Open in browser (http://localhost:3000/)
 
