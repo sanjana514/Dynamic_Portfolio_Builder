@@ -3,11 +3,12 @@
 This is a dynamic portfolio generator where users can create and download their customized portfolio in PDF format. The website allows users to enter their details, preview their portfolio, and store the information in a MongoDB database.
 
 🔹 Features
-1️⃣ User Authentication (Login required to access the portfolio generation feature)
 
-2️⃣ Portfolio Sections
+## 1 User Authentication (Login required to access the portfolio generation feature)
 
-3️⃣ PDF Generation & Database Storage (Stores portfolio data in MongoDB and generates a downloadable PDF)
+## 2 Portfolio Sections
+
+## 3 PDF Generation & Database Storage (Stores portfolio data in MongoDB and generates a downloadable PDF)
 
 🔹 Tech Stack
 ✅ Frontend: HTML, Tailwind CSS
