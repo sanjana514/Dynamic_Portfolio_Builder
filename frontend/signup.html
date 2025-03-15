@@ -1,10 +1,10 @@
+<!-- Signup Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>Sign Up</title>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
@@ -14,11 +14,10 @@
         <input id="signupEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2 rounded">
         <input id="signupPassword" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded">
         <button onclick="handleSignup()" class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800">Sign Up</button>
-        <a href="index.html" class="block mt-2 text-center text-gray-600 hover:underline">Back to Home</a>
     </div>
 
     <script>
-        async function handleSignup() {
+        function handleSignup() {
             const username = document.getElementById("signupUsername").value;
             const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
@@ -28,19 +27,10 @@
                 return;
             }
 
-            try {
-                const response = await fetch("http://localhost:5001/signup", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username, email, password })
-                });
-
-                const data = await response.json();
-                alert(data.message);
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Signup failed! Try again.");
-            }
+            let userData = { name: username, email, password, role: "Not Set", phone: "Not Set", skills: "Not Set", resume: null };
+            localStorage.setItem(email, JSON.stringify(userData));
+            alert("Signup successful! You can now login.");
+            window.location.href = "login.html";
         }
     </script>
 </body>
