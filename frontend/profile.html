@@ -15,7 +15,7 @@
             <img src="/frontend/image/pengu.jpg" alt="Profile Picture" class="w-24 h-24 rounded-full border border-gray-300">
             <div class="ml-6">
                 <h2 id="userName" class="text-2xl font-bold"></h2>
-                <p id="userEmail" class="text-gray-600 text-lg"></p>
+                <p id="userEmail" class="text-gray-700 text-lg"></p>
                 <p id="userPhone" class="text-gray-700"></p>
                 <p id="userLocation" class="text-gray-700"></p>
             </div>
@@ -25,19 +25,19 @@
         <p id="userBio" class="text-gray-700 italic mb-3 ml-5"></p>
 
         <!-- Skills -->
-        <p class="text-gray-700 font-semibold ml-6">Skills:</p>
-        <p id="userSkills" class="bg-gray-200 px-3 py-1 rounded text-sm w-max mb-3 ml-6 mt-3"></p>
+        <p class="text-black font-semibold ml-6">Skills:</p>
+        <p id="userSkills" class="bg-gray-900 px-3 py-1 rounded-full text-sm w-max mb-3 ml-4 mt-3 text-white"></p>
 
         <!-- Resume Upload -->
-        <p class="text-gray-700 font-semibold ml-6">Resume:</p>
+        <p class="text-black font-semibold ml-6">Resume:</p>
         <input type="file" id="resumeUpload" class="hidden" accept=".pdf,.doc,.docx">
         <label for="resumeUpload" class="text-blue-600 cursor-pointer mb-2 inline-block mt-3 ml-6">Upload Resume</label>
-        <p id="resumeStatus" class="text-sm text-gray-600 mb-3 mt-2 ml-6"></p>
+        <p id="resumeStatus" class="text-sm text-gray-800 mb-3 mt-2 ml-6"></p>
 
         <!-- Buttons -->
         <div class="flex justify-center gap-10">
-            <button onclick="editProfile()" class="bg-teal-500 text-white px-6 py-2 rounded hover:bg-gray-700">Edit</button>
-            <button onclick="logout()" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-teal-700">Logout</button>
+            <button onclick="editProfile()" class="bg-teal-700 text-white px-6 py-2 rounded hover:bg-teal-900">Edit</button>
+            <button onclick="logout()" class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-teal-700">Logout</button>
         </div>
         
     </div>
