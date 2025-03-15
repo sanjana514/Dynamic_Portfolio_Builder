@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>Login</title>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
@@ -13,12 +12,26 @@
         <input id="loginEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2 rounded">
         <input id="loginPassword" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded">
         <button onclick="handleLogin()" class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800">Login</button>
-        <a href="index.html" class="block mt-2 text-center text-gray-600 hover:underline">Back to Home</a>
     </div>
 
     <script>
         function handleLogin() {
-            alert("Login functionality will be implemented here!");
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if (!email || !password) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            let userData = JSON.parse(localStorage.getItem(email));
+            if (!userData || userData.password !== password) {
+                alert("Invalid email or password!");
+                return;
+            }
+
+            localStorage.setItem("loggedInUser", email);
+            window.location.href = "profile.html";
         }
     </script>
 </body>
