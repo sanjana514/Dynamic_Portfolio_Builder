@@ -17,7 +17,7 @@
     </div>
 
     <script>
-        function handleSignup() {
+        async function handleSignup() {
             const username = document.getElementById("signupUsername").value;
             const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
@@ -27,10 +27,36 @@
                 return;
             }
 
-            let userData = { name: username, email, password, role: "Not Set", phone: "Not Set", skills: "Not Set", resume: null };
-            localStorage.setItem(email, JSON.stringify(userData));
-            alert("Signup successful! You can now login.");
-            window.location.href = "login.html";
+            let userData = { 
+                username: username, 
+                email, 
+                password, 
+                role: "User", 
+                phone: "", 
+                skills: "", 
+                resume: null 
+            };
+
+            try {
+                const response = await fetch("http://localhost:5001/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert("Signup successful! You can now login.");
+                    window.location.href = "login.html";
+                } else {
+                    alert("Already have an account: " + result.error);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Something went wrong!");
+            }
         }
     </script>
 </body>
