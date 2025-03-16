@@ -1,0 +1,139 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formElements = document.querySelectorAll('input, textarea');
+            formElements.forEach(element => {
+                element.addEventListener('input', updateAside);
+            });
+
+            function updateAside() {
+                document.getElementById('aside-first-name').textContent = document.getElementById('first-name').value || 'FIRST NAME';
+                document.getElementById('aside-surname').textContent = document.getElementById('surname').value || 'SURNAME';
+                document.getElementById('aside-city').textContent = document.getElementById('city').value || 'City';
+                document.getElementById('aside-phone').textContent = document.getElementById('phone').value || 'Phone';
+                document.getElementById('aside-email').textContent = document.getElementById('email').value || 'Email';
+                document.getElementById('aside-summary').textContent = document.getElementById('summary').value || 'Summary';
+                document.getElementById('aside-skills').textContent = document.getElementById('skills').value || 'Skills';
+                document.getElementById('aside-experience').textContent = document.getElementById('experience').value || 'Experience';
+                document.getElementById('aside-education').textContent = document.getElementById('education').value || 'Education';
+            }
+        });
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col lg:flex-row">
+        <!-- Left Section -->
+        <div class="w-full lg:w-1/2 p-8">
+            <h1 class="text-4xl font-bold mb-4">How do you want recruiters to contact you?</h1>
+            <p class="mb-8">Include your full name and at least email or phone number</p>
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="first-name" class="block text-sm font-medium text-gray-700">FIRST NAME</label>
+                        <input type="text" id="first-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    </div>
+                    <div>
+                        <label for="surname" class="block text-sm font-medium text-gray-700">SURNAME</label>
+                        <input type="text" id="surname" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label for="city" class="block text-sm font-medium text-gray-700">CITY</label>
+                        <div class="relative">
+                            <input type="text" id="city" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <i class="fas fa-check absolute right-3 top-3 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="postal-code" class="block text-sm font-medium text-gray-700">POSTAL CODE</label>
+                        <input type="text" id="postal-code" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    </div>
+                    <div>
+                        <label for="country" class="block text-sm font-medium text-gray-700">COUNTRY</label>
+                        <div class="relative">
+                            <input type="text" id="country" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <i class="fas fa-check absolute right-3 top-3 text-green-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">PHONE</label>
+                        <div class="relative">
+                            <input type="text" id="phone" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <i class="fas fa-check absolute right-3 top-3 text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">EMAIL</label>
+                        <div class="relative">
+                            <input type="email" id="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <i class="fas fa-check absolute right-3 top-3 text-green-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="summary" class="block text-sm font-medium text-gray-700">SUMMARY</label>
+                    <textarea id="summary" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="skills" class="block text-sm font-medium text-gray-700">SKILLS</label>
+                    <textarea id="skills" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="experience" class="block text-sm font-medium text-gray-700">EXPERIENCE</label>
+                    <textarea id="experience" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="education" class="block text-sm font-medium text-gray-700">EDUCATION</label>
+                    <textarea id="education" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></textarea>
+                </div>
+                <div class="flex justify-between">
+                    <a href="#" class="px-6 py-2 border border-black text-black font-bold rounded-md hover:bg-gray-200">BACK</a>
+                    <a href="#" class="px-6 py-2 bg-orange-500 text-white font-bold rounded-md hover:bg-orange-600">CONTINUE</a>
+                </div>
+            </form>
+        </div>
+        <!-- Right Section -->
+        <div class="w-full lg:w-1/2 bg-gray-200 p-8">
+            <div class="bg-gray-700 text-white p-4">
+                <h2 class="text-2xl font-bold"><span id="aside-first-name">FIRST NAME</span> <span id="aside-surname">SURNAME</span></h2>
+            </div>
+            <div class="p-4">
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold">CONTACT</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="aside-city">City</span></p>
+                    <p><i class="fas fa-phone"></i> <span id="aside-phone">Phone</span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="aside-email">Email</span></p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold">SKILLS</h3>
+                    <p id="aside-skills">Skills</p>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold">SUMMARY</h3>
+                    <p id="aside-summary">Summary</p>
+                    <hr class="border-t border-gray-400">
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold">EXPERIENCE</h3>
+                    <p id="aside-experience">Experience</p>
+                    <hr class="border-t border-gray-400">
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold">EDUCATION</h3>
+                    <p id="aside-education">Education</p>
+                    <hr class="border-t border-gray-400">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

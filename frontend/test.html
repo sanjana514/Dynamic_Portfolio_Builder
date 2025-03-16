@@ -1,0 +1,184 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .template {
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .template:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-white font-roboto">
+    <div class="container mx-auto p-4">
+        <div class="flex items-center mb-8"><
+            <div class="text-2xl font-bold italic font-cursive bg-gradient-to-r from-teal-400 to-blue-600 text-transparent bg-clip-text">
+                CareerHive
+            </div>
+        </div>
+        <h2 class="text-3xl font-bold text-center mb-2">Choose from our resume templates</h2>
+        <p class="text-center text-gray-600 mb-8">You can always change your template later.</p>
+        <div class="flex justify-center mb-8">
+            <div class="w-1/4">
+                <h3 class="text-lg font-bold mb-2">COLOR</h3>
+                <div class="flex flex-wrap mb-4">
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-blue-500 cursor-pointer" onclick="changeColor('blue')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-gray-500 cursor-pointer" onclick="changeColor('gray')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-blue-900 cursor-pointer" onclick="changeColor('blue-900')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-purple-500 cursor-pointer" onclick="changeColor('purple')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-blue-300 cursor-pointer" onclick="changeColor('blue-300')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-teal-500 cursor-pointer" onclick="changeColor('teal')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-green-700 cursor-pointer" onclick="changeColor('green')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-red-700 cursor-pointer" onclick="changeColor('red')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-pink-300 cursor-pointer" onclick="changeColor('pink')"></div>
+                    </div>
+                    <div class="w-1/4 p-1">
+                        <div class="w-8 h-8 rounded-full bg-yellow-500 cursor-pointer" onclick="changeColor('yellow')"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-3/4 flex justify-center">
+                <div class="grid grid-cols-3 gap-4 overflow-y-auto h-96">
+                    <div class="border p-4 template" id="template1" onclick="selectTemplate(1)">
+                        <img src="1.png" alt="Resume Template 1" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="2.png" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template3" onclick="selectTemplate(3)">
+                        <img src="https://storage.googleapis.com/a1aa/image/tAC5-4U669LMPQMoXJ8tSN4_WH_dF9AFA0WRgjd9aKs.jpg" alt="Resume Template 3" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div><div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div><div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div><div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div><div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                    <div class="border p-4 template" id="template2" onclick="selectTemplate(2)">
+                        <img src="https://storage.googleapis.com/a1aa/image/q_7KTqsgDZLfqruvmHFvT5KTiMRSZdIqFrroyHo42-A.jpg" alt="Resume Template 2" class="mb-4" width="200" height="300">
+                        <div class="bg-green-500 text-white text-center py-1 rounded">PICK_THIS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="flex justify-center space-x-4 mt-8">
+            <!-- Link to the "Choose Template" page -->
+            <a href="from2.html" class="bg-blue-500 text-white text-lg font-bold py-2 px-6 rounded-full hover:bg-blue-600">Choose Template</a>
+            
+            <!-- Link to the "Make Your Own" page -->
+            <a href="Form1.html" class="bg-green-500 text-white text-lg font-bold py-2 px-6 rounded-full hover:bg-green-600">Make Your Own</a>
+        </footer>
+        
+    </div>
+    <script>
+        function changeColor(color) {
+            const templates = document.querySelectorAll('.template');
+            templates.forEach(template => {
+                template.className = `border p-4 template border-${color}-500 bg-${color}-100`;
+            });
+        }
+        
+        function selectTemplate(templateId) {
+            alert(`Template ${templateId} selected!`);
+            // Add more functionality here for selecting template
+        }
+    </script>
+</body>
+</html>

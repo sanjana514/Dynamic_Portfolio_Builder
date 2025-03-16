@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Swiper.js CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3">
+                
+                <!-- Left Side: Logo & Navigation -->
+                <div class="flex items-center space-x-16">
+                    <!-- Logo -->
+                    <!-- <div class="text-2xl font-bold text-blue-600 pl-0">CarrerHive</div> -->
+                    <div class="text-2xl font-bold italic font-cursive bg-gradient-to-r from-teal-400 to-blue-600 text-transparent bg-clip-text">
+                        CareerHive
+                    </div>
+                    
+                    <!-- Navigation Menu -->
+                    <nav class="hidden md:flex space-x-12 ml-10">
+                        <a href="#" class="text-black text-x  hover:text-blue-500">Home</a>
+                        <a href="#" class="text-black text-x  hover:text-blue-500">Resume</a>
+                        <a href="#" class="text-black text-x  hover:text-blue-500">About us</a>
+                    </nav>
+                </div>
+                <!-- Right Side: Login & Signup Buttons -->
+                 <!-- Buttons for Login & Signup -->
+    <div class="space-x-4">
+        <button onclick="openModal('loginModal')" class="border border-gray-600 font-medium px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-black">
+            <a href="login.html">Log in</a></button>
+         <button onclick="openModal('signupModal')" class="bg-teal-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-teal-800 hover:text-white">
+         <a href="signup.html">Sign Up</a></button>
+
+    </div>
+
+    <!-- Login Modal -->
+<!-- <div id="loginModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+        <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
+        <input id="loginEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2 rounded">
+        <input id="loginPassword" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded">
+        <button onclick="handleLogin()" class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800">Login</button>
+        <button onclick="closeModal('loginModal')" class="mt-2 bg-gray-500 text-white px-4 py-2 w-full rounded hover:bg-gray-700">Close</button>
+    </div>
+</div> -->
+
+<!-- Signup Modal -->
+<!-- <div id="signupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+        <h2 class="text-xl font-bold mb-4 text-center">Sign Up</h2>
+        <input id="signupUsername" type="text" placeholder="Username" class="border p-2 w-full mb-2 rounded">
+        <input id="signupEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2 rounded">
+        <input id="signupPassword" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded">
+        <button onclick="handleSignup()" class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800">Sign Up</button>
+        <button onclick="closeModal('signupModal')" class="mt-2 bg-gray-500 text-white px-4 py-2 w-full rounded hover:bg-gray-700">Close</button>
+    </div>
+</div>
+<script>
+    async function handleSignup() {
+        const username = document.getElementById("signupUsername").value;
+        const email = document.getElementById("signupEmail").value;
+        const password = document.getElementById("signupPassword").value;
+
+        const response = await fetch("http://localhost:5000/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+        alert(data.message);
+    }
+
+    async function handleLogin() {
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        alert(data.message);
+    }
+</script> -->
+
+   
+
+                <!-- <div class="space-x-4">
+                    <button class="border border-gray-600 font-medium px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-black" variant="outline">Log in</button>
+                    
+                    <button class="bg-teal-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-teal-800 hover:text-white">Sign up</button>
+                </div>
+     -->
+            </div>
+        </div>
+    </header>
+    <section class="flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-16 bg-gradient-to-r from-white to-teal-50">
+        <!-- Left Side: Text Content -->
+        <div class="max-w-xl text-center md:text-left">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+                Land Your <span class="bg-gradient-to-r from-teal-400 to-blue-600 text-transparent bg-clip-text">Dream Job</span></h1>
+                <h1 class=" mt-2 text-4xl md:text-5xl font-bold text-gray-900">with a Powerful Resume!</h1>
+            <p class="mt-6 text-lg text-gray-600">
+                Create an ATS-friendly resume in minutes and </br> boost your hiring chances.
+            </p>
+    
+            <!-- Buttons -->
+            <div class="mt-8 flex flex-col md:flex-row gap-4">
+                <button class="bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-800">
+                        <a href="resume.html">Create a Resume</a>
+                   </button>
+                <button class="border-2 border-gray-500 text-teal-600 px-6 py-3
+                 rounded-lg font-semibold hover:bg-purple-100">
+                    Edit My Resume 
+                </button>
+            </div>
+        </div>
+        <!-- Right Side: Image -->
+        <div class="w-full max-w-lg mx-auto">
+            <div class="swiper mySwiper rounded-lg shadow-lg">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="image/ima2.jpg" alt="Slide 1" class="w-full h-80 rounded-lg">
+                </div>
+                <div class="swiper-slide">
+                  <img src="image/ima3.webp" alt="Slide 3" class="w-full h-80 rounded-lg">
+                </div>
+                <div class="swiper-slide">
+                  <img src="image/ima4.jpg" alt="Slide 4" class="w-full h-80 rounded-lg">
+                </div>
+                <div class="swiper-slide">
+                    <img src="image/ima1.jpg" alt="Slide 4" class="w-full h-80 rounded-lg">
+                  </div>
+                <div class="swiper-slide">
+                    <img src="image/ima5.jpg" alt="Slide 4" class="w-full h-80 rounded-lg">
+                </div>
+                <div class="swiper-slide">
+                    <img src="image/ima6.jpg" alt="Slide 4" class="w-full h-80 rounded-lg">
+                  </div>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section class="bg-gradient-to-r from-white to-teal-50 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Hero Title -->
+            <h1 class="text-4xl md:text-4xl font-bold text-gray-900 leading-tight">
+                Pick a Resume Template and Build Your Resume in Minutes!
+            </h1>
+    
+            <!-- Subtitle -->
+            <p class="mt-4 text-lg text-gray-600">
+                Choose from a variety of professionally designed resume templates.
+            </p>
+    
+            <!-- Template Cards -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Template 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-800">Modern Resume</h2>
+                    <p class="mt-2 text-gray-600">A sleek and stylish design to showcase your professional skills.</p>
+                    <img src="image/ima7.png" alt="Slide 3" class="w-full h-auto rounded-lg">
+                    <button class="mt-7 px-6 py-2 bg-teal-600 hover:bg-teal-800 text-white rounded-full">Use Template</button>
+                </div>
+    
+                <!-- Template 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-800"> Creative Resume</h2>
+                    <p class="mt-2 text-gray-600">Perfect for designers, artists, and other creative professionals.</p>
+                    <img src="image/ima9.png" alt="Slide 3" class="w-full h-auto rounded-lg">
+                    <button class="mt-4 px-6 py-2 bg-teal-600 hover:bg-teal-800 text-white rounded-full">Use Template</button>
+                </div>
+    
+                <!-- Template 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-800">Professional Resume</h2>
+                    <p class="mt-2 text-gray-600">A clean and traditional layout to impress employers.</p>
+                    <img src="image/ima8.png" alt="Slide 3" class="w-full h-auto rounded-lg">
+                    <button class="mt-6 px-6 py-2 bg-teal-600 hover:bg-teal-800 text-white rounded-full">Use Template</button>
+                </div>
+            </div>
+        </div>
+    </section>  
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-xl font-semibold">Dynamic Portfolio Builder</p>
+                    <p class="text-sm mt-2">Create, customize, and share your unique portfolio!</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/sanjana514" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/sanjana514" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="mailto:sanjana@example.com" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+    
+            <!-- About Us Section -->
+            <div class="mb-6">
+                <p class="text-xl font-semibold">About Us</p>
+                <p class="text-sm mt-2">
+                    Our CV Generator is designed to help job seekers create professional and customized resumes quickly and easily.
+                </br> Whether you're looking to make your first resume or update an existing one, our tool streamlines the process and </br>provides
+        personalized suggestions to help you stand out in the job market.
+                </p>
+            </div>
+            <!-- Quick Links and Legal Sections -->
+            <div class="flex justify-between space-x-6">
+                <!-- Quick Links -->
+                <div>
+                    <p class="text-xl font-semibold">Quick Links</p>
+                    <ul class="mt-2">
+                        <li>Home</li>
+                        <li>Customer Support</li>
+                        <li>Register/Login</li>
+                        <li>Contact Us</li>
+                        <li>FAQs</li>
+                        <li>Privacy Policy</li>
+                        <li>Resume Templates</li>
+                    </ul>
+                </div>
+    
+                <!-- Legal Section -->
+                <div>
+                    <p class="text-xl font-semibold">Legal</p>
+                    <ul class="mt-2">
+                        <li>Terms of Service</li>
+                        <li>Privacy Policy</li>
+                        <li>Cookie Settings</li>
+                        <li>Accessibility</li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Information -->
+                <div>
+                    <p class="text-xl font-semibold">Contact Information</p>
+                    <ul class="mt-2">
+                        <li>Address (Company/Office location)</li>
+                        <li>Email (sanjana@gmail.com)</li>
+                        <li>Phone number (01402961402)</li>
+                        <li>Social media links</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Footer Copyright -->
+            <div class="mt-6 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Dynamic Portfolio Builder. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Swiper.js JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 20,
+        slidesPerView: 1,
+        loop: true,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+      });
+    });
+  </script>
+</body>
+</html>
+
