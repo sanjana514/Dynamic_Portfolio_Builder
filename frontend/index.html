@@ -28,7 +28,7 @@
                         <a href="#" class="text-black text-x  hover:text-blue-500">About us</a>
                     </nav>
                 </div>
-                <!-- Right Side: Login & Signup Buttons -->
+                
                  <!-- Buttons for Login & Signup -->
     <div class="space-x-4">
         <button onclick="openModal('loginModal')" class="border border-gray-600 font-medium px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-black">
@@ -37,72 +37,6 @@
          <a href="signup.html">Sign Up</a></button>
 
     </div>
-
-    <!-- Login Modal -->
-<!-- <div id="loginModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
-        <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
-        <input id="loginEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2 rounded">
-        <input id="loginPassword" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded">
-        <button onclick="handleLogin()" class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800">Login</button>
-        <button onclick="closeModal('loginModal')" class="mt-2 bg-gray-500 text-white px-4 py-2 w-full rounded hover:bg-gray-700">Close</button>
-    </div>
-</div> -->
-
-<!-- Signup Modal -->
-<!-- <div id="signupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
-        <h2 class="text-xl font-bold mb-4 text-center">Sign Up</h2>
-        <input id="signupUsername" type="text" placeholder="Username" class="border p-2 w-full mb-2 rounded">
-        <input id="signupEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2 rounded">
-        <input id="signupPassword" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded">
-        <button onclick="handleSignup()" class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800">Sign Up</button>
-        <button onclick="closeModal('signupModal')" class="mt-2 bg-gray-500 text-white px-4 py-2 w-full rounded hover:bg-gray-700">Close</button>
-    </div>
-</div>
-<script>
-    async function handleSignup() {
-        const username = document.getElementById("signupUsername").value;
-        const email = document.getElementById("signupEmail").value;
-        const password = document.getElementById("signupPassword").value;
-
-        const response = await fetch("http://localhost:5000/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username, email, password })
-        });
-
-        const data = await response.json();
-        alert(data.message);
-    }
-
-    async function handleLogin() {
-        const email = document.getElementById("loginEmail").value;
-        const password = document.getElementById("loginPassword").value;
-
-        const response = await fetch("http://localhost:5000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-        alert(data.message);
-    }
-</script> -->
-
-   
-
-                <!-- <div class="space-x-4">
-                    <button class="border border-gray-600 font-medium px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-black" variant="outline">Log in</button>
-                    
-                    <button class="bg-teal-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-teal-800 hover:text-white">Sign up</button>
-                </div>
-     -->
             </div>
         </div>
     </header>
