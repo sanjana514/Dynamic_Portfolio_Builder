@@ -58,29 +58,42 @@
         document.getElementById("userSkills").innerText = userData.skills || "Not Set";
         document.getElementById("resumeStatus").innerText = userData.resume ? "Resume Uploaded: " + userData.resume : "No Resume Uploaded";
 
-        function editProfile() {
-            let newName = prompt("Enter new name:", userData.name || "");
-            let newEmail = prompt("Enter new email:", userData.email || "");
-            let newPhone = prompt("Enter phone number:", userData.phone || "");
-            let newLocation = prompt("Enter location:", userData.location || "");
-            let newBio = prompt("Enter bio:", userData.bio || "");
-            let newSkills = prompt("Enter skills (comma-separated):", userData.skills || "");
+        async function editProfile() {
+    let newPhone = prompt("Enter phone number:", userData.phone || "");
+    let newLocation = prompt("Enter location:", userData.location || "");
+    let newBio = prompt("Enter bio:", userData.bio || "");
+    let newSkills = prompt("Enter skills (comma-separated):", userData.skills || "");
 
-            if (newName) userData.name = newName;
-            if (newEmail && newEmail !== loggedInEmail) {
-                localStorage.removeItem(loggedInEmail);
-                localStorage.setItem("loggedInUser", newEmail);
-                loggedInEmail = newEmail;
-            }
-            if (newPhone) userData.phone = newPhone;
-            if (newLocation) userData.location = newLocation;
-            if (newBio) userData.bio = newBio;
-            if (newSkills) userData.skills = newSkills;
+    let updatedData = {
+        email: loggedInEmail,
+        phone: newPhone || userData.phone,
+        location: newLocation || userData.location,
+        bio: newBio || userData.bio,
+        skills: newSkills || userData.skills
+    };
 
-            localStorage.setItem(loggedInEmail, JSON.stringify(userData));
+    try {
+        const response = await fetch("http://localhost:5001/update-profile", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert("Profile updated successfully!");
+            localStorage.setItem(loggedInEmail, JSON.stringify(updatedData));
             location.reload();
+        } else {
+            alert("Update failed: " + result.message);
         }
-
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong!");
+    }
+}
         document.getElementById("resumeUpload").addEventListener("change", function(event) {
             let file = event.target.files[0];
             if (file) {
