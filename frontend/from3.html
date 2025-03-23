@@ -1,168 +1,422 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic CV Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const formElements = document.querySelectorAll('input, textarea, select');
-            formElements.forEach(element => {
-                element.addEventListener('input', updateAside);
-            });
-
-            const photoInput = document.getElementById('photo');
-            const photoPreview = document.getElementById('photo-preview');
-
-            photoInput.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        photoPreview.src = event.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            function updateAside() {
-                document.getElementById('aside-first-name').textContent = document.getElementById('first-name').value || 'FIRST NAME';
-                document.getElementById('aside-surname').textContent = document.getElementById('surname').value || 'SURNAME';
-                document.getElementById('aside-city').textContent = document.getElementById('city').value || 'City';
-                document.getElementById('aside-phone').textContent = document.getElementById('phone').value || 'Phone';
-                document.getElementById('aside-email').textContent = document.getElementById('email').value || 'Email';
-                document.getElementById('aside-summary').textContent = document.getElementById('summary').value || 'Summary';
-                document.getElementById('aside-skills').textContent = document.getElementById('skills').value || 'Skills';
-                document.getElementById('aside-experience').textContent = document.getElementById('experience').value || 'Experience';
-                document.getElementById('aside-education').textContent = document.getElementById('education').value || 'Education';
-            }
-
-            // Handle form submission with pop-up confirmation
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Your CV has been submitted successfully!');
-            });
+      document.addEventListener("DOMContentLoaded", () => {
+        const formElements = document.querySelectorAll(
+          "input, textarea, select"
+        );
+        formElements.forEach((element) => {
+          element.addEventListener("input", updateAside);
         });
+
+        const photoInput = document.getElementById("photo");
+        const photoPreview = document.getElementById("photo-preview");
+        let photoBase64 = null;
+
+        photoInput.addEventListener("change", function () {
+          const file = this.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              photoPreview.src = event.target.result;
+              photoBase64 = event.target.result; // Store the base64 data
+              photoPreview.style.display = "block"; // Show the preview
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+        function updateAside() {
+          document.getElementById("aside-first-name").textContent =
+            document.getElementById("first-name").value || "FIRST NAME";
+          document.getElementById("aside-surname").textContent =
+            document.getElementById("surname").value || "SURNAME";
+          document.getElementById("aside-city").textContent =
+            document.getElementById("city").value || "City";
+          document.getElementById("aside-phone").textContent =
+            document.getElementById("phone").value || "Phone";
+          document.getElementById("aside-email").textContent =
+            document.getElementById("email").value || "Email";
+          document.getElementById("aside-summary").textContent =
+            document.getElementById("summary").value || "Summary";
+          document.getElementById("aside-skills").textContent =
+            document.getElementById("skills").value || "Skills";
+          document.getElementById("aside-experience").textContent =
+            document.getElementById("experience").value || "Experience";
+          document.getElementById("aside-education").textContent =
+            document.getElementById("education").value || "Education";
+        }
+
+        // Handle form submission with PDF generation
+        const form = document.getElementById("cv-form");
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          // Show loading indicator
+          const submitBtn = document.getElementById("submit-btn");
+          const originalBtnText = submitBtn.textContent;
+          submitBtn.textContent = "Generating PDF...";
+          submitBtn.disabled = true;
+
+          // Also show status message
+          const statusMsg = document.getElementById("status-message");
+          statusMsg.textContent = "Generating your CV, please wait...";
+          statusMsg.className = "mt-4 p-2 bg-blue-100 text-blue-700 rounded";
+          statusMsg.style.display = "block";
+
+          try {
+            // Collect form data
+            const formData = {
+              firstName: document.getElementById("first-name").value,
+              surname: document.getElementById("surname").value,
+              city: document.getElementById("city").value,
+              postalCode: document.getElementById("postal-code").value,
+              country: document.getElementById("country").value,
+              phone: document.getElementById("phone").value,
+              email: document.getElementById("email").value,
+              summary: document.getElementById("summary").value,
+              skills: document.getElementById("skills").value,
+              experience: document.getElementById("experience").value,
+              education: document.getElementById("education").value,
+              photo: photoBase64,
+            };
+
+            console.log("Sending PDF generation request...");
+            console.log(formData);
+
+            // FIXED: Explicitly use the correct server URL instead of assuming it's the same origin
+            // Your server is running on port 5001, not on the same port as your frontend
+            const serverUrl = "http://localhost:5001";
+
+            // Send data to backend
+            // This code goes in the form submit event listener in your frontend JavaScript
+            // Replace the PDF handling section with this improved version:
+
+            // Send data to backend
+            const response = await fetch(`${serverUrl}/generate-pdf`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            console.log("Response status:", response.status);
+
+            if (response.ok) {
+              try {
+                // Convert the response to a blob
+                const blob = await response.blob();
+                console.log("Received blob:", blob, "Type:", blob.type);
+
+                // Make sure we got a PDF
+                if (blob.type !== "application/pdf") {
+                  console.error("Received non-PDF response:", blob.type);
+                  throw new Error("Server did not return a PDF file");
+                }
+
+                // Create a URL for the blob
+                const url = window.URL.createObjectURL(blob);
+                console.log("Created blob URL:", url);
+
+                // Create a temporary link and trigger download
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = url;
+                a.download = `cv_${formData.firstName}_${formData.surname}.pdf`;
+                document.body.appendChild(a);
+
+                console.log("Triggering download...");
+                a.click();
+
+                // Small delay before cleanup
+                setTimeout(() => {
+                  window.URL.revokeObjectURL(url);
+                  document.body.removeChild(a);
+                  console.log("Download cleanup complete");
+                }, 100);
+
+                // Show success message
+                statusMsg.textContent =
+                  "Your CV has been generated and downloaded successfully!";
+                statusMsg.className =
+                  "mt-4 p-2 bg-green-100 text-green-700 rounded";
+              } catch (err) {
+                console.error("Error processing PDF download:", err);
+                throw new Error(`PDF download failed: ${err.message}`);
+              }
+            } else {
+              // Error handling code remains the same
+
+              // Try to get error details
+              let errorDetails = "Unknown error";
+              try {
+                const errorJson = await response.json();
+                errorDetails = errorJson.message || errorDetails;
+              } catch (e) {
+                console.error("Could not parse error response:", e);
+              }
+
+              throw new Error(`Failed to generate PDF: ${errorDetails}`);
+            }
+          } catch (error) {
+            console.error("Error generating PDF:", error);
+            statusMsg.textContent = `Error: ${error.message}`;
+            statusMsg.className = "mt-4 p-2 bg-red-100 text-red-700 rounded";
+          } finally {
+            // Reset button state
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+          }
+        });
+      });
     </script>
-</head>
-<body class="bg-gray-100">
+  </head>
+  <body class="bg-gray-100">
     <div class="flex flex-col lg:flex-row">
-        <!-- Left Section (CV Form) -->
-        <div class="w-full lg:w-1/2 p-8">
-            <h1 class="text-4xl font-bold mb-4">How do you want recruiters to contact you?</h1>
-            <p class="mb-8">Include your full name and at least email or phone number</p>
-            <form>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label for="first-name" class="block text-sm font-medium text-gray-700">FIRST NAME</label>
-                        <input type="text" id="first-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                    </div>
-                    <div>
-                        <label for="surname" class="block text-sm font-medium text-gray-700">SURNAME</label>
-                        <input type="text" id="surname" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                    <div>
-                        <label for="city" class="block text-sm font-medium text-gray-700">CITY</label>
-                        <select id="city" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                            <option value="" disabled selected>Select a city</option>
-                            <option value="Dhaka">Dhaka</option>
-                            <option value="Chittagong">Chittagong</option>
-                            <option value="Sylhet">Sylhet</option>
-                            <option value="Khulna">Khulna</option>
-                            <option value="Rajshahi">Rajshahi</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="postal-code" class="block text-sm font-medium text-gray-700">POSTAL CODE</label>
-                        <input type="text" id="postal-code" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                    </div>
-                    <div>
-                        <label for="country" class="block text-sm font-medium text-gray-700">COUNTRY</label>
-                        <select id="country" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                            <option value="" disabled selected>Select a country</option>
-                            <option value="Bangladesh">Bangladesh</option>
-                            <option value="India">India</option>
-                            <option value="USA">USA</option>
-                            <option value="Canada">Canada</option>
-                            <option value="UK">UK</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700">PHONE</label>
-                        <input type="text" id="phone" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">EMAIL</label>
-                        <input type="email" id="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="summary" class="block text-sm font-medium text-gray-700">SUMMARY</label>
-                    <textarea id="summary" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="skills" class="block text-sm font-medium text-gray-700">SKILLS</label>
-                    <textarea id="skills" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="experience" class="block text-sm font-medium text-gray-700">EXPERIENCE</label>
-                    <textarea id="experience" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="education" class="block text-sm font-medium text-gray-700">EDUCATION</label>
-                    <textarea id="education" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
-                </div>
-                <div class="flex justify-between">
-                    <!--<a href="#" class="px-6 py-2 border border-black text-black font-bold rounded-md hover:bg-gray-200">BACK</a>-->
-                   
-                </div>
-                <!-- Submit Button -->
-                <button type="submit" class="mt-4 px-6 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600">SUBMIT</button>
-            </form>
-        </div>
-        <!-- Right Section (Profile Preview) -->
-        <div class="w-full lg:w-1/2 bg-gray-200 p-8">
-            <div class="bg-gray-700 text-white p-4 flex justify-between">
-                <h2 class="text-2xl font-bold"><span id="aside-first-name">FIRST NAME</span> <span id="aside-surname">SURNAME</span></h2>
-                <!-- Image Upload -->
-                <div class="flex items-center justify-end">
-                    <label for="photo" class="cursor-pointer bg-gray-600 text-white px-3 py-1 rounded-md hover:bg-gray-700">
-                        Upload Photo
-                    </label>
-                    <input type="file" id="photo" accept="image/*" class="hidden">
-                </div>
+      <!-- Left Section (CV Form) -->
+      <div class="w-full lg:w-1/2 p-8">
+        <h1 class="text-4xl font-bold mb-4">Dynamic CV Builder</h1>
+        <p class="mb-8">
+          Fill in your details below to generate a professional CV
+        </p>
+        <form id="cv-form">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label
+                for="first-name"
+                class="block text-sm font-medium text-gray-700"
+                >FIRST NAME</label
+              >
+              <input
+                type="text"
+                id="first-name"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
             </div>
-            <div class="p-4">
-                <!-- Photo Preview -->
-                <div class="mb-4 flex justify-end">
-                    <img id="photo-preview" class="w-32 h-40 border-2 border-gray-400 rounded-md" alt="Passport Photo">
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-bold">CONTACT</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> <span id="aside-city">City</span></p>
-                    <p><i class="fas fa-phone"></i> <span id="aside-phone">Phone</span></p>
-                    <p><i class="fas fa-envelope"></i> <span id="aside-email">Email</span></p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-bold">SKILLS</h3>
-                    <p id="aside-skills">Skills</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-bold">EXPERIENCE</h3>
-                    <p id="aside-experience">Experience</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-bold">EDUCATION</h3>
-                    <p id="aside-education">Education</p>
-                </div>
+            <div>
+              <label
+                for="surname"
+                class="block text-sm font-medium text-gray-700"
+                >SURNAME</label
+              >
+              <input
+                type="text"
+                id="surname"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
             </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div>
+              <label for="city" class="block text-sm font-medium text-gray-700"
+                >CITY</label
+              >
+              <select
+                id="city"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              >
+                <option value="" disabled selected>Select a city</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Chittagong">Chittagong</option>
+                <option value="Sylhet">Sylhet</option>
+                <option value="Khulna">Khulna</option>
+                <option value="Rajshahi">Rajshahi</option>
+              </select>
+            </div>
+            <div>
+              <label
+                for="postal-code"
+                class="block text-sm font-medium text-gray-700"
+                >POSTAL CODE</label
+              >
+              <input
+                type="text"
+                id="postal-code"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="country"
+                class="block text-sm font-medium text-gray-700"
+                >COUNTRY</label
+              >
+              <select
+                id="country"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              >
+                <option value="" disabled selected>Select a country</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">UK</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700"
+                >PHONE</label
+              >
+              <input
+                type="text"
+                id="phone"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700"
+                >EMAIL</label
+              >
+              <input
+                type="email"
+                id="email"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="summary" class="block text-sm font-medium text-gray-700"
+              >SUMMARY</label
+            >
+            <textarea
+              id="summary"
+              rows="3"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="skills" class="block text-sm font-medium text-gray-700"
+              >SKILLS</label
+            >
+            <textarea
+              id="skills"
+              rows="3"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-4">
+            <label
+              for="experience"
+              class="block text-sm font-medium text-gray-700"
+              >EXPERIENCE</label
+            >
+            <textarea
+              id="experience"
+              rows="3"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-4">
+            <label
+              for="education"
+              class="block text-sm font-medium text-gray-700"
+              >EDUCATION</label
+            >
+            <textarea
+              id="education"
+              rows="3"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              required
+            ></textarea>
+          </div>
+          <!-- Status Message -->
+          <div
+            id="status-message"
+            class="mt-4 p-2 rounded"
+            style="display: none"
+          ></div>
+          <!-- Submit Button -->
+          <button
+            id="submit-btn"
+            type="submit"
+            class="mt-4 px-6 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600"
+          >
+            GENERATE PDF
+          </button>
+        </form>
+      </div>
+      <!-- Right Section (Profile Preview) -->
+      <div class="w-full lg:w-1/2 bg-gray-200 p-8">
+        <div class="bg-gray-700 text-white p-4 flex justify-between">
+          <h2 class="text-2xl font-bold">
+            <span id="aside-first-name">FIRST NAME</span>
+            <span id="aside-surname">SURNAME</span>
+          </h2>
+          <!-- Image Upload -->
+          <div class="flex items-center justify-end">
+            <label
+              for="photo"
+              class="cursor-pointer bg-gray-600 text-white px-3 py-1 rounded-md hover:bg-gray-700"
+            >
+              Upload Photo
+            </label>
+            <input type="file" id="photo" accept="image/*" class="hidden" />
+          </div>
         </div>
+        <div class="p-4">
+          <!-- Photo Preview -->
+          <div class="mb-4 flex justify-end">
+            <img
+              id="photo-preview"
+              class="w-32 h-40 object-cover border-2 border-gray-400 rounded-md"
+              alt="Passport Photo"
+              style="display: none"
+            />
+          </div>
+          <div class="mb-4">
+            <h3 class="text-lg font-bold">CONTACT</h3>
+            <p>
+              <i class="fas fa-map-marker-alt"></i>
+              <span id="aside-city">City</span>
+            </p>
+            <p>
+              <i class="fas fa-phone"></i> <span id="aside-phone">Phone</span>
+            </p>
+            <p>
+              <i class="fas fa-envelope"></i>
+              <span id="aside-email">Email</span>
+            </p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-lg font-bold">SUMMARY</h3>
+            <p id="aside-summary">Summary</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-lg font-bold">SKILLS</h3>
+            <p id="aside-skills">Skills</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-lg font-bold">EXPERIENCE</h3>
+            <p id="aside-experience">Experience</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-lg font-bold">EDUCATION</h3>
+            <p id="aside-education">Education</p>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
