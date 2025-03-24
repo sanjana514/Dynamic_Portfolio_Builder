@@ -1,112 +1,162 @@
 <!-- Profile Page -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>User Profile</title>
-</head>
-<body class="bg-gray-100 min-h-screen flex justify-center items-center">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-[700px] h-auto relative flex flex-col">
-        
-        <!-- Profile Section -->
-        <div class="flex items-center mb-4">
-            <img src="/frontend/image/pengu.jpg" alt="Profile Picture" class="w-24 h-24 rounded-full border border-gray-300">
-            <div class="ml-6">
-                <h2 id="userName" class="text-2xl font-bold"></h2>
-                <p id="userEmail" class="text-gray-700 text-lg"></p>
-                <p id="userPhone" class="text-gray-700"></p>
-                <p id="userLocation" class="text-gray-700"></p>
-            </div>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex justify-center items-center">
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg w-[700px] h-auto relative flex flex-col"
+    >
+      <!-- Profile Section -->
+      <div class="flex items-center mb-4">
+        <img
+          src="/frontend/image/pengu.jpg"
+          alt="Profile Picture"
+          class="w-24 h-24 rounded-full border border-gray-300"
+        />
+        <div class="ml-6">
+          <h2 id="userName" class="text-2xl font-bold"></h2>
+          <p id="userEmail" class="text-gray-700 text-lg"></p>
+          <p id="userPhone" class="text-gray-700"></p>
+          <p id="userLocation" class="text-gray-700"></p>
         </div>
+      </div>
 
-        <!-- Bio Section -->
-        <p id="userBio" class="text-gray-700 italic mb-3 ml-5"></p>
+      <!-- Bio Section -->
+      <p id="userBio" class="text-gray-700 italic mb-3 ml-5"></p>
 
-        <!-- Skills -->
-        <p class="text-black font-semibold ml-6">Skills:</p>
-        <p id="userSkills" class="bg-gray-900 px-3 py-1 rounded-full text-sm w-max mb-3 ml-4 mt-3 text-white"></p>
+      <!-- Skills -->
+      <p class="text-black font-semibold ml-6">Skills:</p>
+      <p
+        id="userSkills"
+        class="bg-gray-900 px-3 py-1 rounded-full text-sm w-max mb-3 ml-4 mt-3 text-white"
+      ></p>
 
-        <!-- Resume Upload -->
-        <p class="text-black font-semibold ml-6">Resume:</p>
-        <input type="file" id="resumeUpload" class="hidden" accept=".pdf,.doc,.docx">
-        <label for="resumeUpload" class="text-blue-600 cursor-pointer mb-2 inline-block mt-3 ml-6">Upload Resume</label>
-        <p id="resumeStatus" class="text-sm text-gray-800 mb-3 mt-2 ml-6"></p>
+      <!-- Resume Upload -->
+      <p class="text-black font-semibold ml-6">Resume:</p>
+      <input
+        type="file"
+        id="resumeUpload"
+        class="hidden"
+        accept=".pdf,.doc,.docx"
+      />
+      <label
+        for="resumeUpload"
+        class="text-blue-600 cursor-pointer mb-2 inline-block mt-3 ml-6"
+        >Upload Resume</label
+      >
+      <p id="resumeStatus" class="text-sm text-gray-800 mb-3 mt-2 ml-6"></p>
 
-        <!-- Buttons -->
-        <div class="flex justify-center gap-10">
-            <button onclick="editProfile()" class="bg-teal-700 text-white px-6 py-2 rounded hover:bg-teal-900">Edit</button>
-            <button onclick="logout()" class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-teal-700">Logout</button>
-        </div>
-        
+      <!-- Buttons -->
+      <div class="flex justify-center gap-10">
+        <button
+          onclick="myResume()"
+          class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-teal-700"
+        >
+          My Resume
+        </button>
+        <button
+          onclick="editProfile()"
+          class="bg-teal-700 text-white px-6 py-2 rounded hover:bg-teal-900"
+        >
+          Edit
+        </button>
+        <button
+          onclick="logout()"
+          class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-teal-700"
+        >
+          Logout
+        </button>
+      </div>
     </div>
 
     <script>
-        let loggedInEmail = localStorage.getItem("loggedInUser");
-        if (!loggedInEmail) {
-            alert("No user logged in! Redirecting to login...");
-            window.location.href = "login.html";
-        }
+      let loggedInEmail = localStorage.getItem("loggedInUser");
+      const username = localStorage.getItem("username");
+      if (!loggedInEmail) {
+        alert("No user logged in! Redirecting to login...");
+        window.location.href = "login.html";
+      }
 
-        let userData = JSON.parse(localStorage.getItem(loggedInEmail)) || {};
-        document.getElementById("userName").innerText = userData.name || "Not Set";
-        document.getElementById("userEmail").innerText = userData.email || "Not Set";
-        document.getElementById("userPhone").innerText = "📞 " + (userData.phone || "Not Set");
-        document.getElementById("userLocation").innerText = "📍 " + (userData.location || "Not Set");
-        document.getElementById("userBio").innerText = "📝 " + (userData.bio || "Not Set");
-        document.getElementById("userSkills").innerText = userData.skills || "Not Set";
-        document.getElementById("resumeStatus").innerText = userData.resume ? "Resume Uploaded: " + userData.resume : "No Resume Uploaded";
+      let userData = JSON.parse(localStorage.getItem(loggedInEmail)) || {};
+      document.getElementById("userName").innerText = username || "Not Set";
+      document.getElementById("userEmail").innerText =
+        userData.email || "Not Set";
+      document.getElementById("userPhone").innerText =
+        "📞 " + (userData.phone || "Not Set");
+      document.getElementById("userLocation").innerText =
+        "📍 " + (userData.location || "Not Set");
+      document.getElementById("userBio").innerText =
+        "📝 " + (userData.bio || "Not Set");
+      document.getElementById("userSkills").innerText =
+        userData.skills || "Not Set";
+      document.getElementById("resumeStatus").innerText = userData.resume
+        ? "Resume Uploaded: " + userData.resume
+        : "No Resume Uploaded";
 
-        async function editProfile() {
-    let newPhone = prompt("Enter phone number:", userData.phone || "");
-    let newLocation = prompt("Enter location:", userData.location || "");
-    let newBio = prompt("Enter bio:", userData.bio || "");
-    let newSkills = prompt("Enter skills (comma-separated):", userData.skills || "");
+      async function editProfile() {
+        let newPhone = prompt("Enter phone number:", userData.phone || "");
+        let newLocation = prompt("Enter location:", userData.location || "");
+        let newBio = prompt("Enter bio:", userData.bio || "");
+        let newSkills = prompt(
+          "Enter skills (comma-separated):",
+          userData.skills || ""
+        );
 
-    let updatedData = {
-        email: loggedInEmail,
-        phone: newPhone || userData.phone,
-        location: newLocation || userData.location,
-        bio: newBio || userData.bio,
-        skills: newSkills || userData.skills
-    };
+        let updatedData = {
+          email: loggedInEmail,
+          phone: newPhone || userData.phone,
+          location: newLocation || userData.location,
+          bio: newBio || userData.bio,
+          skills: newSkills || userData.skills,
+        };
 
-    try {
-        const response = await fetch("http://localhost:5001/update-profile", {
+        try {
+          const response = await fetch("http://localhost:5001/update-profile", {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(updatedData)
-        });
+            body: JSON.stringify(updatedData),
+          });
 
-        const result = await response.json();
-        if (response.ok) {
+          const result = await response.json();
+          if (response.ok) {
             alert("Profile updated successfully!");
             localStorage.setItem(loggedInEmail, JSON.stringify(updatedData));
             location.reload();
-        } else {
+          } else {
             alert("Update failed: " + result.message);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Something went wrong!");
         }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Something went wrong!");
-    }
-}
-        document.getElementById("resumeUpload").addEventListener("change", function(event) {
-            let file = event.target.files[0];
-            if (file) {
-                userData.resume = file.name;
-                localStorage.setItem(loggedInEmail, JSON.stringify(userData));
-                document.getElementById("resumeStatus").innerText = "Resume Uploaded: " + file.name;
-            }
+      }
+      document
+        .getElementById("resumeUpload")
+        .addEventListener("change", function (event) {
+          let file = event.target.files[0];
+          if (file) {
+            userData.resume = file.name;
+            localStorage.setItem(loggedInEmail, JSON.stringify(userData));
+            document.getElementById("resumeStatus").innerText =
+              "Resume Uploaded: " + file.name;
+          }
         });
 
-        function logout() {
-            localStorage.removeItem("loggedInUser");
-            window.location.href = "login.html";
-        }
+      function logout() {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "login.html";
+      }
+
+      function myResume() {
+        window.location.href = "resume.html";
+      }
     </script>
-</body>
+  </body>
 </html>

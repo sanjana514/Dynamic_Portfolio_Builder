@@ -1,63 +1,84 @@
 <!-- Signup Page -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Sign Up</title>
-</head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  </head>
+  <body class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
-        <h2 class="text-xl font-bold mb-4 text-center">Sign Up</h2>
-        <input id="signupUsername" type="text" placeholder="Username" class="border p-2 w-full mb-2 rounded">
-        <input id="signupEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2 rounded">
-        <input id="signupPassword" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded">
-        <button onclick="handleSignup()" class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800">Sign Up</button>
+      <h2 class="text-xl font-bold mb-4 text-center">Sign Up</h2>
+      <input
+        id="signupUsername"
+        type="text"
+        placeholder="Username"
+        class="border p-2 w-full mb-2 rounded"
+      />
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="Email"
+        class="border p-2 w-full mb-2 rounded"
+      />
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="Password"
+        class="border p-2 w-full mb-2 rounded"
+      />
+      <button
+        onclick="handleSignup()"
+        class="bg-teal-600 text-white px-4 py-2 w-full rounded hover:bg-teal-800"
+      >
+        Sign Up
+      </button>
     </div>
 
     <script>
-        async function handleSignup() {
-            const username = document.getElementById("signupUsername").value;
-            const email = document.getElementById("signupEmail").value;
-            const password = document.getElementById("signupPassword").value;
+      async function handleSignup() {
+        const username = document.getElementById("signupUsername").value;
+        const email = document.getElementById("signupEmail").value;
+        const password = document.getElementById("signupPassword").value;
 
-            if (!username || !email || !password) {
-                alert("Please fill all fields!");
-                return;
-            }
-
-            let userData = { 
-                username: username, 
-                email, 
-                password, 
-                role: "User", 
-                phone: "", 
-                skills: "", 
-                resume: null 
-            };
-
-            try {
-                const response = await fetch("http://localhost:5001/signup", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(userData)
-                });
-
-                const result = await response.json();
-                if (response.ok) {
-                    alert("Signup successful! You can now login.");
-                    window.location.href = "login.html";
-                } else {
-                    alert("Already have an account: " + result.error);
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Something went wrong!");
-            }
+        if (!username || !email || !password) {
+          alert("Please fill all fields!");
+          return;
         }
+
+        let userData = {
+          username: username,
+          email,
+          password,
+          role: "User",
+          phone: "",
+          skills: "",
+          resume: null,
+        };
+
+        try {
+          const response = await fetch("http://localhost:5001/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          });
+
+          const result = await response.json();
+          if (response.ok) {
+            localStorage.setItem("userEmail", email);
+            alert("Signup successful! You can now login.");
+            window.location.href = "login.html";
+          } else {
+            alert("Already have an account: " + result.error);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Something went wrong!");
+        }
+      }
     </script>
-</body>
+  </body>
 </html>
